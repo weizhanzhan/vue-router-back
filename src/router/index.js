@@ -1,23 +1,38 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+// import Home from '../views/Home.vue'
+VueRouter.isBack = true
+VueRouter.prototype.goBack = function() {
+  this.isBack = true
+  window.history.go(-1)
+}
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
-    name: 'home',
-    component: Home
+    redirect: '/pageA'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/pageA',
+    name: 'pageA',
+    component: () => import('../views/back/pageA')
+  },
+  {
+    path: '/pageB',
+    name: 'pageB',
+    component: () => import('../views/back/pageB')
+  },
+  {
+    path: '/pageC',
+    name: 'pageC',
+    component: () => import('../views/back/pageC')
+  },
+  {
+    path: '/pageD',
+    name: 'pageD',
+    component: () => import('../views/back/pageD')
   }
+
 ]
 
 const router = new VueRouter({
